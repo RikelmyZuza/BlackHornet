@@ -127,6 +127,20 @@ img { display: block; }
     transform: translateY(-2px);
 }
 
+.btn-terciario {
+    display: inline-block;
+    padding: 13px 32px;
+    border-radius: var(--radius);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    transition: all var(--transition);
+    cursor: pointer;
+    color: #ffffff;
+    box-shadow: 0 4px 18px rgba(200,146,58,0.3);
+}
+
 
 /* ─────────────────────────────────────────
    HEADER — fixo no topo com blur
@@ -293,6 +307,111 @@ nav.menu a.ativo        { color: var(--accent); }
     0%, 100% { transform: translateX(-50%) translateY(0); }
     50%       { transform: translateX(-50%) translateY(6px); }
 }
+
+/* ─────────────────────────────────────────
+   Pagina de login 
+   ───────────────────────────────────────── */
+    .login-form textarea {
+        width: 100%; padding: 13px 16px;
+        font-family: var(--font-corpo); font-size: 0.95rem;
+        background-color: var(--surface); color: var(--text);
+        border: 1px solid var(--border); border-radius: var(--radius);
+        outline: none; transition: border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .login-form    { padding-top: 4px; }
+    .login-form h2     { font-size: 1.4rem; font-style: italic; margin-bottom: 24px; text-align:center;}    
+.login-form h3     { font-size: 1.4rem; font-style: italic; margin-bottom: 24px; }
+.login-form form   { display: flex; flex-direction: column; gap: 16px; text-align: center;  }
+.login-form label  { display: block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; text-align:center}
+.login-form p    { font-size: 1.4rem; font-style: italic; margin-bottom: 24px; text-align:center;}   
+.login-form a {font-size: 1.4rem; font-style: italic; margin-bottom: 24px; text-align:center;}
+.login-form input,
+.login-form textarea {
+    width: 50%; padding: 13px 16px;
+    font-family: var(--font-corpo); font-size: 0.95rem;
+    background-color: var(--surface); color: var(--text);
+    border: 1px solid var(--border); border-radius: var(--radius);
+    outline: none; transition: border-color var(--transition), box-shadow var(--transition);
+    text-align: center;
+}
+.login-form input::placeholder,
+.login-form textarea::placeholder { color: var(--muted); }
+.login-form input:focus,
+.login-form textarea:focus         { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,146,58,0.12); }
+.login-form textarea               { resize: vertical; min-height: 140px; }
+
+.login-form button[type="submit"] {
+    align-self:center; padding: 13px 36px;
+    font-family: var(--font-corpo); font-size: 0.82rem;
+    font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    background: linear-gradient(135deg, var(--accent), var(--accent-dk));
+    color: #0f0a06; border: none; border-radius: var(--radius);
+    cursor: pointer; box-shadow: 0 4px 18px rgba(200,146,58,0.3);
+    transition: all var(--transition);
+    text-align: center;
+}
+.login-form button[type="submit"]:hover { filter: brightness(1.1); transform: translateY(-2px); text-align: center; }
+
+/* Mensagens de feedback do formulário */
+#aviso-sucesso { color: #6fcf8a; margin-top: 16px; font-size: 0.88rem; }
+#aviso-erro    { color: #e07070; margin-top: 16px; font-size: 0.88rem; }
+
+
+
+
+/* ─────────────────────────────────────────
+   Pagina de cadastro
+   ───────────────────────────────────────── */
+
+.cadastro-form textarea {
+    width: 100%; padding: 13px 16px;
+    font-family: var(--font-corpo); font-size: 0.95rem;
+    background-color: var(--surface); color: var(--text);
+    border: 1px solid var(--border); border-radius: var(--radius);
+    outline: none; transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.cadastro-form    { padding-top: 4px; }
+.cadastro-form h2     { font-size: 1.4rem; font-style: italic; margin-bottom: 24px; text-align:center;}    
+.cadastro-form h3     { font-size: 1.4rem; font-style: italic; margin-bottom: 24px; }
+.cadastro-form form   { display: flex; flex-direction: column; gap: 16px; text-align: center;  }
+.cadastro-form label  { display: block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; text-align:center}
+.cadastro-form p    { font-size: 1.4rem; font-style: italic; margin-bottom: 24px; text-align:center;}   
+.cadastro-form a {font-size: 1.4rem; font-style: italic; margin-bottom: 24px; text-align:center;}
+.cadastro-form input,
+.cadastro-form textarea {
+width: 50%; padding: 13px 16px;
+font-family: var(--font-corpo); font-size: 0.95rem;
+background-color: var(--surface); color: var(--text);
+border: 1px solid var(--border); border-radius: var(--radius);
+outline: none; transition: border-color var(--transition), box-shadow var(--transition);
+text-align: center;
+}
+.cadastro-form input::placeholder,
+.cadastro-form textarea::placeholder { color: var(--muted); }
+.cadastro-form input:focus,
+.cadastro-form textarea:focus         { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,146,58,0.12); }
+.cadastro-form textarea               { resize: vertical; min-height: 140px; }
+
+.cadastro-form button[type="submit"] {
+align-self:center; padding: 13px 36px;
+font-family: var(--font-corpo); font-size: 0.82rem;
+font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+background: linear-gradient(135deg, var(--accent), var(--accent-dk));
+color: #0f0a06; border: none; border-radius: var(--radius);
+cursor: pointer; box-shadow: 0 4px 18px rgba(200,146,58,0.3);
+transition: all var(--transition);
+text-align: center;
+}
+.cadastro-form button[type="submit"]:hover { filter: brightness(1.1); transform: translateY(-2px); text-align: center; }
+
+/* Mensagens de feedback do formulário */
+#aviso-sucesso { color: #6fcf8a; margin-top: 16px; font-size: 0.88rem; }
+#aviso-erro    { color: #e07070; margin-top: 16px; font-size: 0.88rem; }
+
+
+
 
 
 /* ─────────────────────────────────────────
