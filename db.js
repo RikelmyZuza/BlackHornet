@@ -14,3 +14,12 @@ const pool = mysql.createPool({
 
 
 module.exports = pool; // exporta o pool para ser usado no server.js
+
+pool.getConnection()
+  .then(conn => {
+    console.log('✅ Conectado ao banco!');
+    conn.release();
+  })
+  .catch(err => {
+    console.error('❌ Erro na conexão:', err.message);
+  });

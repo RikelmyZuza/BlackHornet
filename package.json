@@ -6,6 +6,7 @@
   "dependencies": {
     "accepts": "^2.0.0",
     "aws-ssl-profiles": "^1.1.2",
+    "bcrypt": "^6.0.0",
     "body-parser": "^2.2.2",
     "bytes": "^3.1.2",
     "call-bind-apply-helpers": "^1.0.2",
@@ -83,12 +84,20 @@
     "vary": "^1.1.2",
     "wrappy": "^1.0.2"
   },
-  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs"
+  "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RikelmyZuza/BlackHornet.git"
+  },
+  "bugs": {
+    "url": "https://github.com/RikelmyZuza/BlackHornet/issues"
+  },
+  "homepage": "https://github.com/RikelmyZuza/BlackHornet#readme"
 }
