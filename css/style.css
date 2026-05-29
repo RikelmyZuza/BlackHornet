@@ -131,20 +131,12 @@ img { display: block; }
 /* ─────────────────────────────────────────
    HEADER — fixo no topo com blur
    ───────────────────────────────────────── */
-header {
-    background-color: rgba(30, 21, 16, 0.95);
-    backdrop-filter: blur(10px); /* desfoque do conteúdo atrás */
-    border-bottom: 1px solid var(--border);
-    padding: 12px 56px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 16px rgba(0,0,0,0.4);
-}
-
+   header {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 /* Logo: imagem circular + texto em coluna */
 .logo a { display: flex; align-items: center; gap: 12px; }
 .logo img {
@@ -162,18 +154,54 @@ header {
 .logo-texto .sub     { font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); }
 
 /* Ícone de login no header */
-.icone-login { display: flex; align-items: center; }
+.icone-login {
+    position: absolute;
+    right: 56px;
+    display: flex;
+    align-items: right;
+    gap: 10px;
+}
 .icone-login img {
     width: 64px; height: 64px;
     object-fit: contain;
     border-radius: 50%;
     opacity: 0.85;
     transition: opacity var(--transition);
+    text-align: right;
 }
 .icone-login img:hover { opacity: 1; }
 
+/*===============================
+Icone de favoritos no header
+===================================
+*/
+
+.icone-favoritos{
+    position: absolute;
+    right: 130px;
+    display: flex;
+    align-items: right;
+    gap: 10px;
+}
+
+.icone-favoritos img {
+    width: 47px; height: 47px;
+    object-fit: contain;
+    border-radius: 50%;
+    opacity: 0.85;
+    transition: opacity var(--transition);
+    text-align: right;
+}
+
+.icone-favoritosimg:hover { opacity: 1; }
 /* Navegação principal */
-nav.menu { display: flex; gap: 36px; align-items: center; }
+nav.menu {
+    display: flex;
+    gap: 36px;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
 
 nav.menu a {
     font-size: 0.78rem;
