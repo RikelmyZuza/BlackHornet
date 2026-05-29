@@ -127,20 +127,6 @@ img { display: block; }
     transform: translateY(-2px);
 }
 
-.btn-terciario {
-    display: inline-block;
-    padding: 13px 32px;
-    border-radius: var(--radius);
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.09em;
-    text-transform: uppercase;
-    transition: all var(--transition);
-    cursor: pointer;
-    color: #ffffff;
-    box-shadow: 0 4px 18px rgba(200,146,58,0.3);
-}
-
 
 /* ─────────────────────────────────────────
    HEADER — fixo no topo com blur
@@ -174,6 +160,17 @@ header {
 .logo-texto          { display: flex; flex-direction: column; line-height: 1.1; }
 .logo-texto .nome    { font-family: var(--font-titulo); font-weight: 700; font-size: 1.1rem; letter-spacing: 0.02em; }
 .logo-texto .sub     { font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); }
+
+/* Ícone de login no header */
+.icone-login { display: flex; align-items: center; }
+.icone-login img {
+    width: 64px; height: 64px;
+    object-fit: contain;
+    border-radius: 50%;
+    opacity: 0.85;
+    transition: opacity var(--transition);
+}
+.icone-login img:hover { opacity: 1; }
 
 /* Navegação principal */
 nav.menu { display: flex; gap: 36px; align-items: center; }
@@ -309,107 +306,341 @@ nav.menu a.ativo        { color: var(--accent); }
 }
 
 /* ─────────────────────────────────────────
-   Pagina de login 
+   LOGIN / CADASTRO — login.html
+   Página centralizada com cartão flutuante.
+   Sem coluna de imagem lateral.
    ───────────────────────────────────────── */
-    .login-form textarea {
-        width: 100%; padding: 13px 16px;
-        font-family: var(--font-corpo); font-size: 0.95rem;
-        background-color: var(--surface); color: var(--text);
-        border: 1px solid var(--border); border-radius: var(--radius);
-        outline: none; transition: border-color var(--transition), box-shadow var(--transition);
-    }
 
-    .login-form    { padding-top: 4px; }
-    .login-form h2     { font-size: 1.4rem; font-style: italic; margin-bottom: 24px; text-align:center;}    
-.login-form h3     { font-size: 1.4rem; font-style: italic; margin-bottom: 24px; }
-.login-form form   { display: flex; flex-direction: column; gap: 16px; text-align: center;  }
-.login-form label  { display: block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; text-align:center}
-.login-form p    { font-size: 1.4rem; font-style: italic; margin-bottom: 24px; text-align:center;}   
-.login-form a {font-size: 1.4rem; font-style: italic; margin-bottom: 24px; text-align:center;}
-.login-form input,
-.login-form textarea {
-    width: 50%; padding: 13px 16px;
-    font-family: var(--font-corpo); font-size: 0.95rem;
-    background-color: var(--surface); color: var(--text);
-    border: 1px solid var(--border); border-radius: var(--radius);
-    outline: none; transition: border-color var(--transition), box-shadow var(--transition);
-    text-align: center;
+/* Fundo da página: ocupa a tela toda e centraliza o cartão */
+.login-page {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+    background:
+        radial-gradient(ellipse at 50% 0%, rgba(200,146,58,0.07) 0%, transparent 60%),
+        var(--bg);
 }
-.login-form input::placeholder,
-.login-form textarea::placeholder { color: var(--muted); }
-.login-form input:focus,
-.login-form textarea:focus         { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,146,58,0.12); }
-.login-form textarea               { resize: vertical; min-height: 140px; }
 
-.login-form button[type="submit"] {
-    align-self:center; padding: 13px 36px;
-    font-family: var(--font-corpo); font-size: 0.82rem;
-    font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
-    background: linear-gradient(135deg, var(--accent), var(--accent-dk));
-    color: #0f0a06; border: none; border-radius: var(--radius);
-    cursor: pointer; box-shadow: 0 4px 18px rgba(200,146,58,0.3);
+/* Cartão central que envolve todo o formulário */
+.login-form-side {
+    width: 100%;
+    max-width: 700px;
+    background-color: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 48px 40px;
+    box-shadow: var(--shadow);
+    position: relative;
+}
+
+/* Faixa dourada decorativa no topo do cartão */
+.login-form-side::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    opacity: 0.6;
+}
+
+/* Área de conteúdo — ocupa toda a largura do cartão */
+.login-form-wrap { width: 100%; }
+
+/* ── Cabeçalho do cartão (logo, título, subtítulo) ── */
+.login-form-wrap .form-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.login-form-wrap .form-header .section-label { margin-bottom: 10px; }
+
+.login-form-wrap .form-header h2 {
+    font-size: 2rem;
+    font-style: italic;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 6px;
+}
+
+.login-form-wrap .form-header p {
+    font-size: 0.83rem;
+    color: var(--muted);
+}
+
+/* ── Abas "Entrar" / "Cadastrar" ── */
+.form-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 4px;
+    margin-bottom: 28px;
+    gap: 4px;
+}
+
+/* Botão de aba individual */
+.form-tab {
+    padding: 10px 16px;
+    font-family: var(--font-corpo);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: transparent;
+    border: none;
+    border-radius: calc(var(--radius) - 2px);
+    cursor: pointer;
     transition: all var(--transition);
+}
+
+/* Aba ativa: fundo dourado */
+.form-tab.ativo {
+    background: linear-gradient(135deg, var(--accent), var(--accent-dk));
+    color: #0f0a06;
+    box-shadow: 0 2px 10px rgba(200,146,58,0.3);
+}
+
+.form-tab:not(.ativo):hover { color: var(--accent); }
+
+/* ── Painéis de formulário (Login e Cadastro) ── */
+/* Por padrão os painéis ficam ocultos; o JS adiciona .ativo para exibir */
+.form-panel        { display: none; }
+.form-panel.ativo  { display: block; }
+
+/* ── Grupo de campos de entrada ── */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+/* Caixa de cada campo: label + input empilhados */
+.input-box {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.input-box label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+/* Wrapper relativo para posicionar o ícone dentro do input */
+.input-box .input-wrapper {
+    position: relative;
+    background: var(--surface);
+    border-radius: var(--radius);
+}
+
+/* Ícone SVG posicionado à esquerda dentro do campo */
+.input-box .input-wrapper svg {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 15px;
+    height: 15px;
+    stroke: var(--muted);
+    fill: none;
+    pointer-events: none; /* não interfere no clique do input */
+    transition: stroke var(--transition);
+}
+
+/* Quando o input está em foco, o ícone muda de cor */
+.input-box .input-wrapper:focus-within svg { stroke: var(--accent); }
+
+/* Campo de texto */
+.input-box input {
+    position: relative;
+    z-index: 1; /* fica acima do ícone */
+    width: 100%;
+    padding: 12px 16px 12px 40px; /* espaço à esquerda para o ícone */
+    font-family: var(--font-corpo);
+    font-size: 0.92rem;
+    background: transparent; /* herda o fundo do .input-wrapper */
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    outline: none;
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.input-box input::placeholder { color: var(--muted); }
+
+.input-box input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(200,146,58,0.12);
+}
+
+/* ── Link "Esqueci a senha" ── */
+.form-extras {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -8px;
+    margin-bottom: 16px;
+}
+
+.form-extras a {
+    font-size: 0.75rem;
+    color: var(--muted);
+    transition: color var(--transition);
+}
+
+.form-extras a:hover { color: var(--accent); }
+
+/* ── Botão principal (Entrar / Criar conta) ── */
+.btn-login {
+    width: 100%;
+    padding: 14px;
+    font-family: var(--font-corpo);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, var(--accent), var(--accent-dk));
+    color: #0f0a06;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    box-shadow: 0 4px 18px rgba(200,146,58,0.3);
+    transition: all var(--transition);
+    margin-bottom: 20px;
+}
+
+.btn-login:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(200,146,58,0.4);
+}
+
+/* ── Divisor "ou" entre o botão e o login social ── */
+.form-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+/* Linhas horizontais dos dois lados do "ou" */
+.form-divider::before,
+.form-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+}
+
+.form-divider span {
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+/* ── Botão de login com Google ── */
+.btn-google {
+    width: 100%;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: var(--font-corpo);
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all var(--transition);
+    margin-bottom: 24px;
+}
+
+.btn-google:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-1px);
+}
+
+.btn-google svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+/* ── Texto para alternar entre Login e Cadastro ── */
+.form-switch {
     text-align: center;
-}
-.login-form button[type="submit"]:hover { filter: brightness(1.1); transform: translateY(-2px); text-align: center; }
-
-/* Mensagens de feedback do formulário */
-#aviso-sucesso { color: #6fcf8a; margin-top: 16px; font-size: 0.88rem; }
-#aviso-erro    { color: #e07070; margin-top: 16px; font-size: 0.88rem; }
-
-
-
-
-/* ─────────────────────────────────────────
-   Pagina de cadastro
-   ───────────────────────────────────────── */
-
-.cadastro-form textarea {
-    width: 100%; padding: 13px 16px;
-    font-family: var(--font-corpo); font-size: 0.95rem;
-    background-color: var(--surface); color: var(--text);
-    border: 1px solid var(--border); border-radius: var(--radius);
-    outline: none; transition: border-color var(--transition), box-shadow var(--transition);
+    font-size: 0.82rem;
+    color: var(--muted);
 }
 
-.cadastro-form    { padding-top: 4px; }
-.cadastro-form h2     { font-size: 1.4rem; font-style: italic; margin-bottom: 24px; text-align:center;}    
-.cadastro-form h3     { font-size: 1.4rem; font-style: italic; margin-bottom: 24px; }
-.cadastro-form form   { display: flex; flex-direction: column; gap: 16px; text-align: center;  }
-.cadastro-form label  { display: block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; text-align:center}
-.cadastro-form p    { font-size: 1.4rem; font-style: italic; margin-bottom: 24px; text-align:center;}   
-.cadastro-form a {font-size: 1.4rem; font-style: italic; margin-bottom: 24px; text-align:center;}
-.cadastro-form input,
-.cadastro-form textarea {
-width: 50%; padding: 13px 16px;
-font-family: var(--font-corpo); font-size: 0.95rem;
-background-color: var(--surface); color: var(--text);
-border: 1px solid var(--border); border-radius: var(--radius);
-outline: none; transition: border-color var(--transition), box-shadow var(--transition);
-text-align: center;
+/* Botão inline (sem estilo de botão) que troca de painel */
+.form-switch button {
+    background: none;
+    border: none;
+    color: var(--accent);
+    font-family: var(--font-corpo);
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+    transition: color var(--transition);
 }
-.cadastro-form input::placeholder,
-.cadastro-form textarea::placeholder { color: var(--muted); }
-.cadastro-form input:focus,
-.cadastro-form textarea:focus         { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,146,58,0.12); }
-.cadastro-form textarea               { resize: vertical; min-height: 140px; }
 
-.cadastro-form button[type="submit"] {
-align-self:center; padding: 13px 36px;
-font-family: var(--font-corpo); font-size: 0.82rem;
-font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
-background: linear-gradient(135deg, var(--accent), var(--accent-dk));
-color: #0f0a06; border: none; border-radius: var(--radius);
-cursor: pointer; box-shadow: 0 4px 18px rgba(200,146,58,0.3);
-transition: all var(--transition);
-text-align: center;
+.form-switch button:hover {
+    color: var(--accent-lt);
+    text-decoration: underline;
 }
-.cadastro-form button[type="submit"]:hover { filter: brightness(1.1); transform: translateY(-2px); text-align: center; }
 
-/* Mensagens de feedback do formulário */
-#aviso-sucesso { color: #6fcf8a; margin-top: 16px; font-size: 0.88rem; }
-#aviso-erro    { color: #e07070; margin-top: 16px; font-size: 0.88rem; }
+/* ── Texto de termos de uso (só no painel de Cadastro) ── */
+.form-terms {
+    font-size: 0.72rem;
+    color: var(--muted);
+    text-align: center;
+    line-height: 1.6;
+    margin-top: -8px;
+    margin-bottom: 16px;
+}
 
+.form-terms a { color: var(--accent); transition: color var(--transition); }
+.form-terms a:hover { color: var(--accent-lt); }
+
+/* ── Mensagens de feedback (sucesso / erro) ── */
+.form-feedback {
+    padding: 10px 14px;
+    border-radius: var(--radius);
+    font-size: 0.82rem;
+    margin-bottom: 16px;
+    display: none; /* oculto por padrão; o JS adiciona .visivel */
+}
+
+.form-feedback.sucesso {
+    background: rgba(111, 207, 138, 0.12);
+    border: 1px solid rgba(111, 207, 138, 0.3);
+    color: #6fcf8a;
+}
+
+.form-feedback.erro {
+    background: rgba(224, 112, 112, 0.12);
+    border: 1px solid rgba(224, 112, 112, 0.3);
+    color: #e07070;
+}
+
+.form-feedback.visivel { display: block; }
+
+/* ── Responsivo: cartão ocupa mais largura em telas pequenas ── */
+@media (max-width: 480px) {
+    .login-form-side  { padding: 40px 24px; }
+    .login-form-wrap  { max-width: 100%; }
+}
 
 
 

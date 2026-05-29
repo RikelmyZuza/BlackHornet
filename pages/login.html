@@ -3,66 +3,260 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login e Cadastro</title>
-    <!-- Inclua seu arquivo CSS aqui -->
-    <link rel="stylesheet" href="/css/style.css">
+    <title>Entrar | Black Hornet Coffee</title>
+    <!-- Todo o CSS desta página está em css/style.css, seção LOGIN / CADASTRO -->
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 
-    <div class="login-cadastro-form">
-        <!-- FORMULÁRIO DE LOGIN -->
-        <div class="login-form" id="loginBox">
-            <h2>Login</h2>
-            <form action="#" method="POST">
-                <div class="input-box">
-                    <label for="email-login">E-mail</label>
-                    <input type="email" id="email-login" placeholder="Digite seu e-mail" required>
-                </div>
-                <div class="input-box">
-                    <label for="senha-login">Senha</label>
-                    <input type="password" id="senha-login" placeholder="Digite sua senha" required>
-                </div>
-                <button type="submit">Entrar</button>
-            </form>
-            <p>Já tem uma conta? <a href="#" class='btn-terciario' onclick="alternarFormulario()">cadastro</a></p>
-        </div>
-
-        <!-- FORMULÁRIO DE CADASTRO -->
-        <div class="cadastro-form" id="cadastroBox" style="display: none;">
-            <h2>Cadastro</h2>
-            <form action="#" method="POST"> 
-                <div class="input-box">
-                    <label for="nome-cadastro">Nome Completo</label>
-                    <input type="text" id="nome-cadastro" placeholder="Digite seu nome" required>
-                </div>
-                <div class="input-box">
-                    <label for="email-cadastro">E-mail</label>
-                    <input type="email" id="email-cadastro" placeholder="Digite seu e-mail" required>
-                </div>
-                <div class="input-box">
-                    <label for="senha-cadastro">Senha</label>
-                    <input type="password" id="senha-cadastro" placeholder="Crie uma senha" required>
-                </div>
-                <button type="submit">Cadastrar</button>
-            </form>
-            <p>Já tem uma conta? <a href="#" onclick="alternarFormulario()">Faça Login</a></p>
-        </div>
+<!-- ── HEADER ── -->
+<header>
+    <div class="logo">
+        <a href="../index.html">
+            <img src="../img/logo.jpeg" alt="Logo Black Hornet Coffee">
+            <div class="logo-texto">
+                <span class="nome">Black Hornet</span>
+                <span class="sub">Coffee</span>
+            </div>
+        </a>
     </div>
+    <nav class="menu">
+        <a href="../index.html">Home</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="receitas.html">Receitas</a>
+        <a href="contato.html">Contato</a>
+        <a href="login.html" class="ativo">
+            <div class="icone-login">
+                <img src="../img/Login.png" alt="Entrar / Minha conta">
+            </div>
+        </a>
+    </nav>
+</header>
 
-    <!-- SCRIPT PARA ALTERNAR ENTRE AS TELAS -->
-    <script>
-        function alternarFormulario() {
-            const loginBox = document.getElementById('loginBox');
-            const cadastroBox = document.getElementById('cadastroBox');
+<!-- ─────────────────────────────────────────
+     PÁGINA DE LOGIN
+     Layout: fundo escuro com cartão centralizado.
+     O cartão contém dois painéis (Login e Cadastro)
+     alternados pelas abas no topo.
+───────────────────────────────────────────── -->
+<div class="login-page">
 
-            if (loginBox.style.display === 'none') {
-                loginBox.style.display = 'block';
-                cadastroBox.style.display = 'none';
-            } else {
-                loginBox.style.display = 'none';
-                cadastroBox.style.display = 'block';
-            }
-        }
-    </script>
+    <!-- ── CARTÃO CENTRAL ── -->
+    <div class="login-form-side">
+        <div class="login-form-wrap">
+
+            <!-- Cabeçalho: label, título e subtítulo (atualizados pelo JS ao trocar de aba) -->
+            <div class="form-header">
+                <span class="section-label">Black Hornet Coffee</span>
+                <h2 id="formTitulo">Bem‑vindo de volta</h2>
+                <p id="formSubtitulo">Acesse sua conta para continuar</p>
+            </div>
+
+            <!-- Abas para alternar entre Login e Cadastro -->
+            <div class="form-tabs" role="tablist">
+                <button
+                    class="form-tab ativo"
+                    id="tabLogin"
+                    role="tab"
+                    aria-selected="true"
+                    aria-controls="painelLogin"
+                    onclick="mudarAba('login')"
+                >Entrar</button>
+                <button
+                    class="form-tab"
+                    id="tabCadastro"
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="painelCadastro"
+                    onclick="mudarAba('cadastro')"
+                >Cadastrar</button>
+            </div>
+
+            <!-- ══════════════════════════════
+                 PAINEL DE LOGIN
+                 Visível por padrão (.ativo)
+                 ══════════════════════════════ -->
+            <div class="form-panel ativo" id="painelLogin" role="tabpanel">
+
+                <!-- Área de feedback de erro/sucesso (preenchida pelo JS) -->
+                <div id="feedbackLogin" class="form-feedback"></div>
+
+                <!-- Campos de e-mail e senha -->
+                <div class="input-group">
+
+                    <div class="input-box">
+                        <label for="emailLogin">E-mail</label>
+                        <div class="input-wrapper">
+                            <input
+                                type="email"
+                                id="emailLogin"
+                                placeholder="seu@email.com"
+                                autocomplete="email"
+                                required
+                            >
+                            <!-- Ícone de envelope posicionado pelo CSS -->
+                            <svg viewBox="0 0 24 24" stroke-width="1.5">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="senhaLogin">Senha</label>
+                        <div class="input-wrapper">
+                            <input
+                                type="password"
+                                id="senhaLogin"
+                                placeholder="Sua senha"
+                                autocomplete="current-password"
+                                required
+                            >
+                            <!-- Ícone de cadeado posicionado pelo CSS -->
+                            <svg viewBox="0 0 24 24" stroke-width="1.5">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Link "Esqueci a senha" alinhado à direita -->
+                <div class="form-extras">
+                    <a href="#">Esqueci a senha</a>
+                </div>
+
+                <!-- Botão principal de login -->
+                <button class="btn-login" onclick="fazerLogin()">Entrar na conta</button>
+
+                <!-- Separador visual "ou" -->
+                <div class="form-divider"><span>ou</span></div>
+
+                <!-- Login alternativo com Google -->
+                <button class="btn-google" onclick="loginGoogle()">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                    </svg>
+                    Continuar com Google
+                </button>
+
+                <!-- Texto para quem ainda não tem conta -->
+                <p class="form-switch">
+                    Não tem conta?
+                    <button onclick="mudarAba('cadastro')">Criar agora</button>
+                </p>
+
+            </div><!-- /painelLogin -->
+
+
+            <!-- ══════════════════════════════
+                 PAINEL DE CADASTRO
+                 Oculto por padrão; ativado pelo JS
+                 ══════════════════════════════ -->
+            <div class="form-panel" id="painelCadastro" role="tabpanel">
+
+                <!-- Área de feedback de erro/sucesso (preenchida pelo JS) -->
+                <div id="feedbackCadastro" class="form-feedback"></div>
+
+                <!-- Campos de nome, e-mail e senha -->
+                <div class="input-group">
+
+                    <div class="input-box">
+                        <label for="nomeCadastro">Nome completo</label>
+                        <div class="input-wrapper">
+                            <input
+                                type="text"
+                                id="nomeCadastro"
+                                placeholder="Seu nome"
+                                autocomplete="name"
+                                required
+                            >
+                            <!-- Ícone de pessoa posicionado pelo CSS -->
+                            <svg viewBox="0 0 24 24" stroke-width="1.5">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="emailCadastro">E-mail</label>
+                        <div class="input-wrapper">
+                            <input
+                                type="email"
+                                id="emailCadastro"
+                                placeholder="seu@email.com"
+                                autocomplete="email"
+                                required
+                            >
+                            <svg viewBox="0 0 24 24" stroke-width="1.5">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="senhaCadastro">Senha</label>
+                        <div class="input-wrapper">
+                            <input
+                                type="password"
+                                id="senhaCadastro"
+                                placeholder="Crie uma senha forte"
+                                autocomplete="new-password"
+                                required
+                            >
+                            <svg viewBox="0 0 24 24" stroke-width="1.5">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Aviso de termos de uso -->
+                <p class="form-terms">
+                    Ao criar sua conta, você concorda com nossos<br>
+                    <a href="#">Termos de Uso</a> e <a href="#">Política de Privacidade</a>.
+                </p>
+
+                <!-- Botão principal de cadastro -->
+                <button class="btn-login" onclick="fazerCadastro()">Criar minha conta</button>
+
+                <!-- Separador visual "ou" -->
+                <div class="form-divider"><span>ou</span></div>
+
+                <!-- Cadastro alternativo com Google -->
+                <button class="btn-google" onclick="loginGoogle()">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                    </svg>
+                    Cadastrar com Google
+                </button>
+
+                <!-- Texto para quem já tem conta -->
+                <p class="form-switch">
+                    Já tem conta?
+                    <button onclick="mudarAba('login')">Fazer login</button>
+                </p>
+
+            </div><!-- /painelCadastro -->
+
+        </div><!-- /login-form-wrap -->
+    </div><!-- /login-form-side -->
+
+</div><!-- /login-page -->
+
+<!-- Lógica de alternância de abas, validação e feedback -->
+<script src="../js/login.js" defer></script>
+
 </body>
 </html>
