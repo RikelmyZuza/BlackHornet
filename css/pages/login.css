@@ -1,0 +1,145 @@
+/* ─────────────────────────────────────────
+   LOGIN / CADASTRO — login.html
+   ───────────────────────────────────────── */
+.login-page {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+    background:
+        radial-gradient(ellipse at 50% 0%, rgba(200,146,58,0.07) 0%, transparent 60%),
+        var(--bg);
+}
+.login-form-side {
+    width: 100%;
+    max-width: 700px;
+    background-color: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 48px 40px;
+    box-shadow: var(--shadow);
+    position: relative;
+}
+.login-form-side::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    opacity: 0.6;
+}
+.login-form-wrap { width: 100%; }
+.login-form-wrap .form-header { text-align: center; margin-bottom: 32px; }
+.login-form-wrap .form-header .section-label { margin-bottom: 10px; }
+.login-form-wrap .form-header h2 { font-size: 2rem; font-style: italic; font-weight: 600; line-height: 1.2; margin-bottom: 6px; }
+.login-form-wrap .form-header p  { font-size: 0.83rem; color: var(--muted); }
+
+.form-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 4px;
+    margin-bottom: 28px;
+    gap: 4px;
+}
+.form-tab {
+    padding: 10px 16px;
+    font-family: var(--font-corpo);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: transparent;
+    border: none;
+    border-radius: calc(var(--radius) - 2px);
+    cursor: pointer;
+    transition: all var(--transition);
+}
+.form-tab.ativo {
+    background: linear-gradient(135deg, var(--accent), var(--accent-dk));
+    color: #0f0a06;
+    box-shadow: 0 2px 10px rgba(200,146,58,0.3);
+}
+.form-tab:not(.ativo):hover { color: var(--accent); }
+
+.form-panel        { display: none; }
+.form-panel.ativo  { display: block; }
+
+.input-group { display: flex; flex-direction: column; gap: 14px; margin-bottom: 20px; }
+.input-box   { display: flex; flex-direction: column; gap: 6px; }
+.input-box label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; color: var(--muted); }
+.input-box .input-wrapper { position: relative; background: var(--surface); border-radius: var(--radius); }
+.input-box .input-wrapper svg {
+    position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+    width: 15px; height: 15px; stroke: var(--muted); fill: none;
+    pointer-events: none; transition: stroke var(--transition);
+}
+.input-box .input-wrapper:focus-within svg { stroke: var(--accent); }
+.input-box input {
+    position: relative; z-index: 1; width: 100%;
+    padding: 12px 16px 12px 40px;
+    font-family: var(--font-corpo); font-size: 0.92rem;
+    background: transparent; color: var(--text);
+    border: 1px solid var(--border); border-radius: var(--radius);
+    outline: none; transition: border-color var(--transition), box-shadow var(--transition);
+}
+.input-box input::placeholder { color: var(--muted); }
+.input-box input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,146,58,0.12); }
+
+.form-extras { display: flex; justify-content: flex-end; margin-top: -8px; margin-bottom: 16px; }
+.form-extras a { font-size: 0.75rem; color: var(--muted); transition: color var(--transition); }
+.form-extras a:hover { color: var(--accent); }
+
+.btn-login {
+    width: 100%; padding: 14px;
+    font-family: var(--font-corpo); font-size: 0.8rem;
+    font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    background: linear-gradient(135deg, var(--accent), var(--accent-dk));
+    color: #0f0a06; border: none; border-radius: var(--radius);
+    cursor: pointer; box-shadow: 0 4px 18px rgba(200,146,58,0.3);
+    transition: all var(--transition); margin-bottom: 20px;
+}
+.btn-login:hover { filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(200,146,58,0.4); }
+
+.form-divider { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.form-divider::before,
+.form-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.form-divider span { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+
+.btn-google {
+    width: 100%; padding: 12px;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    font-family: var(--font-corpo); font-size: 0.8rem; font-weight: 500;
+    color: var(--text); background: var(--surface);
+    border: 1px solid var(--border); border-radius: var(--radius);
+    cursor: pointer; transition: all var(--transition); margin-bottom: 24px;
+}
+.btn-google:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+.btn-google svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+.form-switch { text-align: center; font-size: 0.82rem; color: var(--muted); }
+.form-switch button {
+    background: none; border: none; color: var(--accent);
+    font-family: var(--font-corpo); font-size: 0.82rem;
+    font-weight: 600; cursor: pointer; padding: 0; transition: color var(--transition);
+}
+.form-switch button:hover { color: var(--accent-lt); text-decoration: underline; }
+
+.form-terms { font-size: 0.72rem; color: var(--muted); text-align: center; line-height: 1.6; margin-top: -8px; margin-bottom: 16px; }
+.form-terms a { color: var(--accent); transition: color var(--transition); }
+.form-terms a:hover { color: var(--accent-lt); }
+
+.form-feedback { padding: 10px 14px; border-radius: var(--radius); font-size: 0.82rem; margin-bottom: 16px; display: none; }
+.form-feedback.sucesso { background: rgba(111,207,138,0.12); border: 1px solid rgba(111,207,138,0.3); color: #6fcf8a; }
+.form-feedback.erro    { background: rgba(224,112,112,0.12); border: 1px solid rgba(224,112,112,0.3); color: #e07070; }
+.form-feedback.visivel { display: block; }
+
+@media (max-width: 480px) {
+    .login-form-side { padding: 40px 24px; }
+    .login-form-wrap { max-width: 100%; }
+}

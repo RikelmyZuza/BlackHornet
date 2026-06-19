@@ -1,0 +1,159 @@
+/* ─────────────────────────────────────────
+   RECEITAS — receitas.html
+   ───────────────────────────────────────── */
+.receitas-hero {
+    background: linear-gradient(to bottom, rgba(200,146,58,0.06) 0%, transparent 100%), var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 60px 24px 48px;
+    text-align: center;
+}
+.receitas-hero h2 { font-size: 2.8rem; font-style: italic; margin-bottom: 8px; }
+.receitas-hero p  { color: var(--muted); font-size: 0.95rem; max-width: 500px; margin: 0 auto 28px; }
+
+#campoDeBusca {
+    display: block;
+    width: min(100%, 440px); margin: 0 auto;
+    padding: 13px 20px 13px 44px;
+    font-family: var(--font-corpo); font-size: 0.9rem;
+    background-color: var(--surface-2);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239a8570' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: 16px center;
+    color: var(--text); border: 1px solid var(--border);
+    border-radius: 40px; outline: none;
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+#campoDeBusca::placeholder { color: var(--muted); }
+#campoDeBusca:focus        { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,146,58,0.12); }
+
+.receitas-lista  { max-width: 1200px; margin: 0 auto; padding: 60px 56px 80px; }
+#gradeDeReceitas { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 28px; }
+
+/* ─── Card de receita ─── */
+.card-receita {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+.card-receita:hover { transform: translateY(-6px); border-color: var(--accent); box-shadow: var(--shadow); }
+.card-receita__imagem {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    flex-shrink: 0;
+}
+.etiqueta-categoria {
+    position: absolute; top: 12px; left: 12px;
+    font-size: 0.62rem; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: #0f0a06; background: var(--accent);
+    padding: 3px 10px; border-radius: 4px;
+}
+.card-receita__corpo {
+    padding: 18px 20px 22px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.card-receita__titulo    { font-size: 1.05rem; font-style: italic; margin-bottom: 8px; }
+.card-receita__descricao { font-size: 0.82rem; color: var(--muted); line-height: 1.6; flex: 1; }
+.btn-abrir-receita {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 8px 20px;
+    font-family: var(--font-corpo);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: transparent;
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    cursor: pointer;
+    align-self: flex-start;
+    transition: all var(--transition);
+}
+.btn-abrir-receita:hover { background: var(--accent); color: #0f0a06; }
+
+/* ─── Modal ─── */
+#modalDetalheReceita         { display: none; position: fixed; inset: 0; z-index: 200; align-items: center; justify-content: center; }
+#modalDetalheReceita.visivel { display: flex; }
+.modal-fundo-escuro {
+    position: absolute; inset: 0;
+    background: rgba(10, 6, 3, 0.82);
+    backdrop-filter: blur(4px);
+}
+.modal-caixa {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    width: min(92vw, 840px);
+    max-height: 88vh;
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+    animation: modalEntrada 0.28s ease;
+}
+@keyframes modalEntrada {
+    from { opacity: 0; transform: scale(0.94) translateY(12px); }
+    to   { opacity: 1; transform: scale(1)    translateY(0); }
+}
+.modal-coluna-imagem        { position: relative; min-height: 280px; }
+.modal-coluna-imagem img    { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-lg) 0 0 var(--radius-lg); }
+.modal-coluna-conteudo     { padding: 32px 28px; overflow-y: auto; }
+.modal-coluna-conteudo h2  { font-size: 1.6rem; font-style: italic; margin-bottom: 10px; }
+.modal-coluna-conteudo > p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; margin-bottom: 24px; }
+.modal-secoes { display: flex; flex-direction: column; gap: 20px; }
+.modal-secao h4 { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+.modal-secao ul              { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.modal-secao ul li           { font-size: 0.85rem; color: var(--muted); padding-left: 14px; position: relative; }
+.modal-secao ul li::before   { content: '—'; position: absolute; left: 0; color: var(--accent); font-size: 0.7rem; }
+.modal-secao ol              { counter-reset: numeroPasso; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.modal-secao ol li           { font-size: 0.85rem; color: var(--muted); padding-left: 28px; position: relative; line-height: 1.55; counter-increment: numeroPasso; }
+.modal-secao ol li::before   { content: counter(numeroPasso); position: absolute; left: 0; width: 18px; height: 18px; background: var(--accent); color: #0f0a06; border-radius: 50%; font-size: 0.65rem; font-weight: 700; display: flex; align-items: center; justify-content: center; top: 2px; }
+.modal-btn-fechar {
+    position: absolute; top: 12px; right: 14px;
+    background: var(--surface-2); border: 1px solid var(--border);
+    color: var(--muted); width: 30px; height: 30px;
+    border-radius: 50%; font-size: 0.8rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all var(--transition); z-index: 1;
+}
+.modal-btn-fechar:hover { background: var(--accent); color: #0f0a06; border-color: var(--accent); }
+
+/* ─── CTA ─── */
+.cta-faixa {
+    background: linear-gradient(135deg, var(--accent-dk) 0%, var(--accent) 60%, var(--accent-lt) 100%);
+    padding: 64px 24px;
+    text-align: center;
+}
+.cta-faixa h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-style: italic; color: #0f0a06; margin-bottom: 12px; }
+.cta-faixa p  { font-size: 0.95rem; color: rgba(15,10,6,0.75); margin: 0 auto 28px; max-width: 480px; }
+.cta-faixa .btn-escuro {
+    display: inline-block; padding: 13px 32px;
+    background: #0f0a06; color: var(--accent);
+    border-radius: var(--radius); font-size: 0.8rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    transition: all var(--transition); margin: 6px;
+}
+.cta-faixa .btn-escuro:hover { background: #1e1510; transform: translateY(-2px); }
+
+@media (max-width: 900px) {
+    .receitas-lista { padding: 40px 24px 60px; }
+    .modal-caixa               { grid-template-columns: 1fr; width: 94vw; }
+    .modal-coluna-imagem       { min-height: 200px; }
+    .modal-coluna-imagem img   { border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
+}
+@media (max-width: 600px) {
+    #gradeDeReceitas { grid-template-columns: 1fr; }
+}

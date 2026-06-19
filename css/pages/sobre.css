@@ -1,0 +1,88 @@
+/* ─────────────────────────────────────────
+   CTA FAIXA — usada no sobre.html
+   ───────────────────────────────────────── */
+.cta-faixa {
+    background: linear-gradient(135deg, var(--accent-dk) 0%, var(--accent) 60%, var(--accent-lt) 100%);
+    padding: 64px 24px;
+    text-align: center;
+}
+.cta-faixa h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-style: italic; color: #0f0a06; margin-bottom: 12px; }
+.cta-faixa p  { font-size: 0.95rem; color: rgba(15,10,6,0.75); margin: 0 auto 28px; max-width: 480px; }
+
+/* Botão escuro dentro da faixa dourada */
+.cta-faixa .btn-escuro {
+    display: inline-block; padding: 13px 32px;
+    background: #0f0a06; color: var(--accent);
+    border-radius: var(--radius);
+    font-size: 0.8rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    transition: all var(--transition); margin: 6px;
+}
+.cta-faixa .btn-escuro:hover { background: #1e1510; transform: translateY(-2px); }
+
+/* Botão contorno dentro da faixa dourada */
+.cta-faixa .btn-outline-escuro {
+    display: inline-block; padding: 12px 32px;
+    background: transparent; color: #0f0a06;
+    border: 1.5px solid rgba(15,10,6,0.4);
+    border-radius: var(--radius);
+    font-size: 0.8rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    transition: all var(--transition); margin: 6px;
+}
+.cta-faixa .btn-outline-escuro:hover { border-color: #0f0a06; transform: translateY(-2px); }
+
+
+/* ─────────────────────────────────────────
+   SOBRE — sobre.html
+   ───────────────────────────────────────── */
+
+/* Seção principal: texto à esquerda, imagem à direita */
+.sobre-hero {
+    padding: 80px 56px 60px;
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+}
+.sobre-hero-txt h2 { font-size: 2.6rem; font-style: italic; margin-bottom: 20px; }
+.sobre-hero-txt p  { color: var(--muted); line-height: 1.8; margin-bottom: 14px; font-size: 0.95rem; }
+
+.sobre-hero-img     { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); aspect-ratio: 4/5; overflow: hidden; }
+.sobre-hero-img img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-lg); }
+
+/* Grade de valores: 4 cards */
+.valores-grid         { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 72px 56px; }
+.valores-grid-inner   { max-width: 1100px; margin: 0 auto; text-align: center; }
+.valores-grid-inner h2           { font-size: 2rem; font-style: italic; margin-bottom: 8px; }
+.valores-grid-inner > .divider   { margin-bottom: 48px; }
+.valores-items        { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+
+.valor-card       { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 20px; text-align: center; transition: border-color var(--transition), transform var(--transition); }
+.valor-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+.valor-icon       { color: var(--accent); display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+.valor-card h3    { font-size: 0.95rem; font-style: italic; margin-bottom: 8px; }
+.valor-card p     { font-size: 0.8rem; color: var(--muted); line-height: 1.55; }
+
+/* Seção de história: texto corrido centralizado */
+.historia      { max-width: 800px; margin: 0 auto; padding: 72px 56px; text-align: center; }
+.historia h2   { font-size: 2rem; font-style: italic; margin-bottom: 8px; }
+.historia > .divider { margin-bottom: 32px; }
+.historia p    { color: var(--muted); line-height: 1.85; margin-bottom: 18px; font-size: 0.95rem; text-align: justify; }
+
+
+/* ─────────────────────────────────────────
+   RESPONSIVO
+   ───────────────────────────────────────── */
+
+/* Tablet: layout de 2 colunas vira 1 coluna */
+@media (max-width: 900px) {
+    .sobre-hero     { grid-template-columns: 1fr; gap: 40px; padding: 56px 24px; }
+    .valores-items  { grid-template-columns: repeat(2, 1fr); }
+    .valores-grid   { padding: 56px 24px; }
+    .historia       { padding: 56px 24px; }
+}
+
+/* Mobile: tudo em coluna única */
+@media (max-width: 600px) {
+    .valores-items  { grid-template-columns: 1fr; }
+}

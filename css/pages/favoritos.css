@@ -1,0 +1,78 @@
+/* ─────────────────────────────────────────
+   FAVORITOS — favoritos.html
+   ───────────────────────────────────────── */
+.favoritos-page {
+    flex: 1;
+    padding: 60px 56px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+.favoritos-header { text-align: center; margin-bottom: 48px; }
+.favoritos-header h1 { font-size: 2.4rem; font-style: italic; margin-bottom: 8px; }
+.favoritos-header p  { color: var(--muted); font-size: 0.9rem; }
+
+.favoritos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.favoritos-vazio { text-align: center; padding: 80px 24px; color: var(--muted); }
+.favoritos-vazio svg { width: 64px; height: 64px; stroke: var(--border); fill: none; margin: 0 auto 24px; display: block; }
+.favoritos-vazio h2 { font-size: 1.4rem; font-style: italic; color: var(--text); margin-bottom: 8px; }
+.favoritos-vazio p  { font-size: 0.85rem; margin-bottom: 24px; }
+
+/* Card de receita (herdado de index.css — duplicado aqui para autonomia) */
+.card-receita {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+.card-receita:hover { transform: translateY(-6px); border-color: var(--accent); box-shadow: var(--shadow); }
+.card-receita__imagem {
+    width: 100%; aspect-ratio: 4/3; object-fit: cover; object-position: center;
+    display: block; flex-shrink: 0;
+}
+.etiqueta-categoria {
+    position: absolute; top: 12px; left: 12px;
+    font-size: 0.62rem; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: #0f0a06; background: var(--accent);
+    padding: 3px 10px; border-radius: 4px;
+}
+.card-receita__corpo {
+    padding: 18px 20px 22px;
+    display: flex; flex-direction: column; flex: 1;
+}
+.card-receita__titulo    { font-size: 1.05rem; font-style: italic; margin-bottom: 8px; }
+.card-receita__descricao { font-size: 0.82rem; color: var(--muted); line-height: 1.6; flex: 1; }
+
+.btn-desfavoritar {
+    display: flex; align-items: center; gap: 6px;
+    background: transparent;
+    border: 1px solid rgba(224, 90, 122, 0.4);
+    color: #e05a7a;
+    border-radius: var(--radius);
+    padding: 8px 16px;
+    font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    cursor: pointer; transition: all var(--transition);
+    margin-top: 14px; width: 100%; justify-content: center;
+}
+.btn-desfavoritar:hover { background: rgba(224, 90, 122, 0.12); border-color: #e05a7a; }
+.btn-desfavoritar svg { width: 14px; height: 14px; fill: #e05a7a; stroke: none; }
+
+@media (max-width: 900px) {
+    .favoritos-grid { grid-template-columns: repeat(2, 1fr); }
+    .favoritos-page { padding: 40px 24px 60px; }
+}
+@media (max-width: 560px) {
+    .favoritos-grid { grid-template-columns: 1fr; }
+}
